@@ -11,3 +11,5 @@ Route::get('/', function () {
 Route::resource('destinations', DestinationController::class);
 
 Route::resource('activities', ActivityController::class);
+
+//rutas
