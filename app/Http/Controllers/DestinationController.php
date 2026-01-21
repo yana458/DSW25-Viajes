@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Activity;
 use App\Models\Destination;
 use Illuminate\Http\Request;
 
@@ -21,7 +22,8 @@ class DestinationController extends Controller
      */
     public function create()
     {
-        //
+        $destinations = Destination::all();
+        return view('destinations.create', compact('destinations'));
     }
 
     /**
@@ -29,7 +31,8 @@ class DestinationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Destination::create($request->all());
+        return redirect()->route('destinations.index');
     }
 
     /**
@@ -37,7 +40,8 @@ class DestinationController extends Controller
      */
     public function show(Destination $destination)
     {
-        //
+        $allActivities = Activity::all();
+        return view('destinations.show', compact('destination', 'allActivities'));
     }
 
     /**
@@ -45,7 +49,7 @@ class DestinationController extends Controller
      */
     public function edit(Destination $destination)
     {
-        //
+        return view('destinations.edit', compact('destination'));
     }
 
     /**
@@ -53,7 +57,8 @@ class DestinationController extends Controller
      */
     public function update(Request $request, Destination $destination)
     {
-        //
+        $destination->update($request->all());
+        return redirect()->route('destinations.index');
     }
 
     /**
@@ -61,6 +66,7 @@ class DestinationController extends Controller
      */
     public function destroy(Destination $destination)
     {
-        //
+        $destination->delete();
+        return redirect()->route('destinations.index');
     }
 }

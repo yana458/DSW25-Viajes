@@ -9,7 +9,7 @@
 @section('content')
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
         <h2>Actividades Disponibles</h2>
-        <a href="" class="btn-new">
+        <a href="{{ route('activities.create') }}" class="btn-new">
             + Nueva Actividad
         </a>
     </div>
@@ -19,7 +19,8 @@
             <tr>
                 <th>Actividad</th>
                 <th>Destino</th>
-                <th>Descripción</th> <th class="text-right">Duración</th>
+                <th>Descripción</th> 
+                <th class="text-right">Duración</th>
                 <th class="text-right">Precio</th>
                 <th class="text-center">Acciones</th>
             </tr>
@@ -48,14 +49,23 @@
                     </td>
 
                     <td class="text-center">
-                        <a href="" class="btn btn-sm" style="background-color: #3498db; color: white;">Ver</a>
-                        
-                        <a href="" class="btn btn-sm" style="background-color: #f39c12; color: white;">Editar</a>
+                        <a href="{{ route('activities.show', $activity) }}" class="btn btn-sm" style="background-color: #3498db; color: white;">Ver</a>
+
+                        <a href="{{ route('activities.edit', $activity) }}" class="btn btn-sm" style="background-color: #f39c12; color: white;">Editar</a>
 
 
-                            <button type="submit" class="btn btn-sm" style="background-color: #e74c3c; color: white; border: none; cursor: pointer;" onclick="return confirm('¿Estás seguro de querer eliminar esta actividad?')">
+                        <form action="{{ route('activities.destroy', $activity) }}"
+                            method="POST"
+                            style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit"
+                                    class="btn btn-sm"
+                                    style="background-color: #e74c3c; color: white; border: none; cursor: pointer;"
+                                    onclick="return confirm('¿Estás seguro de querer eliminar esta actividad?')">
                                 Borrar
                             </button>
+                        </form>
 
                     </td>
                 </tr>

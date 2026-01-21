@@ -1,11 +1,11 @@
 <ul>
     <li>
-        <a href="">Inicio</a>
+        <a href="{{ url('/') }}">Inicio</a>
     </li>
     <li>
-        <a href="">Destinos</a>
+        <a href="{{ route('destinations.index') }}">Destinos</a>
     </li>
     <li>
-        <a href="">Actividades</a>
+        <a href="{{ route('activities.index') }}">Actividades</a>
     </li>
 </ul>

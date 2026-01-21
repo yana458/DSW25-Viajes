@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Activity;
+use App\Models\Destination;
 use Illuminate\Http\Request;
 
 class ActivityController extends Controller
@@ -21,7 +22,9 @@ class ActivityController extends Controller
      */
     public function create()
     {
-        //
+        $activities = Activity::all();
+        $destinations = Destination::all();
+        return view('activities.create', compact('activities', 'destinations'));            
     }
 
     /**
@@ -29,7 +32,8 @@ class ActivityController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Activity::create($request->all());
+        return redirect()->route('activities.index');
     }
 
     /**
@@ -37,7 +41,7 @@ class ActivityController extends Controller
      */
     public function show(Activity $activity)
     {
-        //
+        return view('activities.show', compact('activity'));
     }
 
     /**
@@ -45,7 +49,8 @@ class ActivityController extends Controller
      */
     public function edit(Activity $activity)
     {
-        //
+        $destinations = Destination::all();
+        return view('activities.edit', compact('activity', 'destinations'));
     }
 
     /**
@@ -53,7 +58,8 @@ class ActivityController extends Controller
      */
     public function update(Request $request, Activity $activity)
     {
-        //
+        $activity->update($request->all());
+        return redirect()->route('activities.index');
     }
 
     /**
@@ -61,6 +67,7 @@ class ActivityController extends Controller
      */
     public function destroy(Activity $activity)
     {
-        //
+        $activity->delete();
+        return redirect()->route('activities.index');
     }
 }

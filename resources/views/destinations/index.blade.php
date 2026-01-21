@@ -9,7 +9,7 @@
 @section('content')
     <div class="page-header">
         <h2>Explora el Mundo</h2>
-        <a href="" class="btn-new">
+        <a href="{{ route('destinations.create') }}" class="btn-new">
             + Nuevo Destino
         </a>
     </div>
@@ -33,9 +33,14 @@
                     </p>
                     
                     <div class="card-actions">
-                        <a href="" class="btn btn-view">Ver Detalles</a>
+                        <a href="{{ route('destinations.show', $destination) }}" class="btn btn-view">Ver Detalles</a>
+                         <a href="{{ route('destinations.edit', $destination) }}" class="btn btn-view">Editar</a>
                         
-                        <button type="submit" class="btn btn-delete" onclick="return confirm('¿Seguro?')">Eliminar</button>
+                        <form action="{{ route('destinations.destroy', $destination) }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-delete" onclick="return confirm('¿Seguro?')">Eliminar</button>
+                        </form>
                     </div>
                 </div>
             </article>
