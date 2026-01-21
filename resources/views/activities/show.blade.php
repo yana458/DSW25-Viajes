@@ -55,4 +55,47 @@
             </div>
         </div>
     </div>
+    
+    <hr>
+    <h2>Reseñas</h2>
+
+<p>
+  @forelse($activity->comments as $r)
+    <p>
+        <b>{{ $r->author }}</b>
+    </p>
+      
+      <p>
+        {{ $r->commentText }}
+      </p>
+
+      <a href="{{ route('comments.edit', $r) }}">Editar</a>
+
+      <form action="{{ route('comments.destroy', $r) }}" method="POST" style="display:inline;">
+        @csrf
+        @method('DELETE')
+        <button type="submit" onclick="return confirm('¿Eliminar reseña?')">Borrar</button>
+      </form>
+    </li>
+  @empty
+    <li>No hay reseñas todavía.</li>
+  @endforelse
+</ul>
+
+<h3>Añadir reseña</h3>
+<form action="{{ route('comments.store') }}" method="POST">
+  @csrf
+  <input type="hidden" name="activity_id" value="{{ $activity->id }}">
+
+  <p><label>Autor</label><br>
+    <input name="author" required>
+  </p>
+
+  <p><label>Comentario</label><br>
+    <textarea name="comment"></textarea>
+  </p>
+
+  <button type="submit" class="btn-new">Enviar comentrio</button>
+</form>
+
 @endsection

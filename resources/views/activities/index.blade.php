@@ -7,8 +7,28 @@
 @endpush
 
 @section('content')
+
+<!-- boton filtar por detino -->
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
         <h2>Actividades Disponibles</h2>
+        <form method="GET" action="{{ route('activities.index') }}">
+    <select name="destination_id">
+        <option value="">-- Todos los destinos --</option>
+        @foreach($destinations as $destination)
+            <option value="{{ $destination->id }}"
+                {{ request('destination_id') == $destination->id ? 'selected' : '' }}>
+                {{ $destination->name }}
+            </option>
+        @endforeach
+    </select>
+
+    <button type="submit" class="btn-new">Filtrar</button>
+
+    <a href="{{ route('activities.index') }}" class="btn-new" style="text-decoration:none;">
+        Quitar filtro
+    </a>
+</form>
+
         <a href="{{ route('activities.create') }}" class="btn-new">
             + Nueva Actividad
         </a>
@@ -22,6 +42,7 @@
                 <th>Descripción</th> 
                 <th class="text-right">Duración</th>
                 <th class="text-right">Precio</th>
+                <th>Comentarios</th>
                 <th class="text-center">Acciones</th>
             </tr>
         </thead>
@@ -47,6 +68,8 @@
                     <td class="text-right" style="font-weight: bold;">
                         {{ number_format($activity->price, 2) }}€
                     </td>
+
+                    <td>{{ count($activity->comments) }} comentarios</td>
 
                     <td class="text-center">
                         <a href="{{ route('activities.show', $activity) }}" class="btn btn-sm" style="background-color: #3498db; color: white;">Ver</a>

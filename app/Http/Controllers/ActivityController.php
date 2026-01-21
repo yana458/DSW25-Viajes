@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Activity;
+use App\Models\Comment;
 use App\Models\Destination;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,9 @@ class ActivityController extends Controller
     public function index()
     {
         $activities = Activity::all();
-        return view('activities.index', compact('activities'));
+        $destinations = Destination::all();
+        $comments = Comment::all();
+        return view('activities.index', compact('activities', 'destinations', 'comments'));
     }
 
     /**

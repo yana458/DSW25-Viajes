@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+
 use Illuminate\Database\Eloquent\Model;
 
 class Activity extends Model
@@ -13,4 +14,16 @@ class Activity extends Model
     {
         return $this->belongsTo(Destination::class);
     }
+
+    public function comments()
+{
+    return $this->hasMany(Comment::class);
+}
+
+public function tours()
+{
+    return $this->belongsToMany(Tour::class);
+}
+
+
 }

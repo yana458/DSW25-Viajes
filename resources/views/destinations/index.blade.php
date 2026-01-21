@@ -28,9 +28,9 @@
                     <p class="description">
                         {{ Str::limit($destination->description, 80) }}
                     </p>
-                    <p class="activities">
+                    <a href="{{ route('activities.index', ['activity' => 'destination']) }}" class="activities">
                         {{ count($destination->activities) }} actividades
-                    </p>
+                    </a>
                     
                     <div class="card-actions">
                         <a href="{{ route('destinations.show', $destination) }}" class="btn btn-view">Ver Detalles</a>
